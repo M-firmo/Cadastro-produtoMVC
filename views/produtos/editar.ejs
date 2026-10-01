@@ -30,8 +30,26 @@
 
     <br>
 
+    <label>Categoria:</label>
+    <select name="CategoriaId">
+        <option value="">Sem categoria</option>
+        <% categorias.forEach(c => { %>
+            <option
+                value="<%= c.id %>"
+                <%= produto.CategoriaId == c.id ? 'selected' : '' %>
+            >
+                <%= c.nome %>
+            </option>
+        <% }) %>
+    </select>
+
+    <br>
+
     <button type="submit">
         Atualizar
     </button>
 
 </form>
+
+<br>
+<a href="/produtos">Voltar</a>

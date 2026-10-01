@@ -1,0 +1,38 @@
+<h1>Categorias</h1>
+
+<a href="/categorias/novo">Nova categoria</a>
+
+<table border="1">
+    <tr>
+        <th>Nome</th>
+        <th>Ações</th>
+    </tr>
+
+    <% categorias.forEach(c => { %>
+
+        <tr>
+            <td><%= c.nome %></td>
+
+            <td>
+                <a href="/categorias/<%= c.id %>/editar">
+                    Editar
+                </a>
+
+                <form
+                    action="/categorias/<%= c.id %>/deletar"
+                    method="POST"
+                    style="display:inline"
+                >
+                    <button type="submit">
+                        Excluir
+                    </button>
+                </form>
+            </td>
+        </tr>
+
+    <% }) %>
+
+</table>
+
+<br>
+<a href="/produtos">Ir para Produtos</a>

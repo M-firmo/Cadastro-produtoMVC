@@ -25,6 +25,12 @@ router.get('/novo', async (req, res) => {
 
 // Criar produto
 router.post('/', async (req, res) => {
+  // Se "Sem categoria" for selecionado, o valor vem vazio. 
+  // O banco de dados (SQLite) precisa que seja 'null' para não dar erro de Chave Estrangeira.
+  if (req.body.CategoriaId === '') {
+    req.body.CategoriaId = null;
+  }
+  
   await Produto.create(req.body);
 
   res.redirect('/produtos');
@@ -46,6 +52,10 @@ router.get('/:id/editar', async (req, res) => {
 
 // Atualizar produto
 router.post('/:id', async (req, res) => {
+  if (req.body.CategoriaId === '') {
+    req.body.CategoriaId = null;
+  }
+
   await Produto.update(req.body, {
     where: {
       id: req.params.id

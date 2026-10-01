@@ -23,7 +23,21 @@ const Produto = sequelize.define('Produto', {
   }
 });
 
+const Categoria = sequelize.define('Categoria', {
+  nome: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+}, {
+  freezeTableName: true
+});
+
+// Associações
+Categoria.hasMany(Produto, { foreignKey: 'CategoriaId', as: 'produtos' });
+Produto.belongsTo(Categoria, { foreignKey: 'CategoriaId', as: 'categoria' });
+
 module.exports = {
   sequelize,
-  Produto
+  Produto,
+  Categoria
 };
